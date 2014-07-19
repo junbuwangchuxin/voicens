@@ -133,104 +133,26 @@ knp_gaufrette:
     stream_wrapper: ~
 
     adapters:
-        picture_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/picture/
         image_adapter:
             local:
                 directory: %kernel.root_dir%/../web/assets/image/
-        attachment_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/attachment/
-        slide_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/slide/
-        consultant_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/consultant/
-        event_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/event/
-        companyimage_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/companyimage/
-        resumeimage_adapter:
-            local:
-                directory: %kernel.root_dir%/../web/assets/resumeimage/
-        topic_adapter:
-            local: 
-                directory: %kernel.root_dir%/../web/assets/topic/
+
     filesystems:
-        picture_fs:
-            adapter:    picture_adapter
         image_fs:
             adapter:    image_adapter
-        attachment_fs:
-            adapter:    attachment_adapter
-        slide_fs:
-            adapter:    slide_adapter
-        consultant_fs:
-            adapter:    consultant_adapter
-        event_fs:
-            adapter:    event_adapter
-        companyimage_fs:
-            adapter:    companyimage_adapter
-        resumeimage_fs:
-            adapter:    resumeimage_adapter
-        topic_fs:
-            adapter:    topic_adapter
+
 vich_uploader:
     db_driver:  orm
     twig:       true
     gaufrette:  true
     storage:    vich_uploader.storage.gaufrette
     mappings:
-        picture:
-            uri_prefix: /assets/picture
-            namer: vich_uploader.namer_uniqid
-            upload_destination: picture_fs
-            inject_on_load: true
         image:
             uri_prefix: /assets/image
             namer: vich_uploader.namer_uniqid
             upload_destination: image_fs
             inject_on_load: true
-        attachment:
-            uri_prefix: /assets/attachment
-            namer: vich_uploader.namer_uniqid
-            upload_destination: slide_fs
-            inject_on_load: true
-        slide:
-            uri_prefix: /assets/slide
-            namer: vich_uploader.namer_uniqid
-            upload_destination: slide_fs
-            inject_on_load: true
-        consultant:
-            uri_prefix: /assets/consultant
-            namer: vich_uploader.namer_uniqid
-            upload_destination: consultant_fs
-            inject_on_load: true
-        event:
-            uri_prefix: /assets/event
-            namer: vich_uploader.namer_uniqid
-            upload_destination: event_fs
-            inject_on_load: true
-        company_image:
-            uri_prefix: /assets/companyimage
-            namer: vich_uploader.namer_uniqid
-            upload_destination: companyimage_fs
-            inject_on_load: true
-        resume_image:
-            uri_prefix: /assets/resumeimage
-            namer: vich_uploader.namer_uniqid
-            upload_destination: resumeimage_fs
-            inject_on_load: true
-        topic:
-            uri_prefix: /assets/topic
-            namer: vich_uploader.namer_uniqid
-            upload_destination: topic_fs
-            inject_on_load: true
-            
+
 liip_imagine:
     resolvers:
        default:
@@ -246,8 +168,3 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [256, 256], mode: outbound }
-        thumbnail_extralage:
-            quality: 75
-            filters:
-                thumbnail: { size: [512, 512], mode: outbound }
-
