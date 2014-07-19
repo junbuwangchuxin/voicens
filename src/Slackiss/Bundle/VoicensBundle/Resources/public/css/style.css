@@ -1,0 +1,9 @@
+.body{
+  min-height: 500px;
+}
+
+.footer{
+  border-top: 1px solid #EEEEEE;
+  padding: 5px 0px;
+  color: #666666;
+}
