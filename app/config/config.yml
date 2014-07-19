@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'SlackissVoicensBundle:common:form_theme.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -67,3 +70,184 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+trsteel_ckeditor:
+    class: Trsteel\CkeditorBundle\Form\Type\CkeditorType
+    transformers: ['html_purifier']
+    toolbar: ['document', 'clipboard', 'editing', '/', 'basicstyles', 'paragraph', 'links', '/', 'insert', 'styles', 'tools']
+    toolbar_groups:
+        document: ['Source','-','Save','-','Templates']
+        clipboard: ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']
+        editing: ['Find','Replace','-','SelectAll']
+        basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat']
+        paragraph: ['NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock']
+        links: ['Link','Unlink','Anchor']
+        insert: ['Image','Flash','Table','HorizontalRule']
+        styles: ['Styles','Format']
+        tools: ['Maximize', 'ShowBlocks']
+    ui_color: '#000000'
+    startup_outline_blocks: true
+    width: 100% #Integer or %
+    height: 400 #Integer or %
+    language: 'zh-cn'
+
+fm_elfinder:
+    locale: %locale% # defaults to current request locale
+    editor: ckeditor # other choices are tinymce or simple
+    showhidden: false # defaults to false
+    fullscreen: true # defaults true, applies to simple and ckeditor editors
+    include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+    compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
+    connector:
+        debug: false # defaults to false
+        roots:       # at least one root must be defined
+            uploads:
+                driver: LocalFileSystem
+                path: assets/uploads
+                upload_allow: ['image/png', 'image/jpg', 'image/jpeg','image/gif']
+                upload_deny: ['all']
+                upload_max_size: 4M
+
+knp_paginator:
+    page_range: 5                   
+    default_options:
+        page_name: page             
+        sort_field_name: sort       
+        sort_direction_name: direction
+        distinct: true                
+    template:
+        pagination: SlackissVoicensBundle:include:pagination.html.twig
+
+knp_time: ~
+
+
+fos_user:
+    db_driver: orm 
+    firewall_name: main
+    user_class: Slackiss\Bundle\VoicensBundle\Entity\Member
+    from_email:
+        address:        %mailer_user%
+        sender_name:    声音力场
+
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        picture_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/picture/
+        image_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/image/
+        attachment_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/attachment/
+        slide_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/slide/
+        consultant_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/consultant/
+        event_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/event/
+        companyimage_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/companyimage/
+        resumeimage_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/assets/resumeimage/
+        topic_adapter:
+            local: 
+                directory: %kernel.root_dir%/../web/assets/topic/
+    filesystems:
+        picture_fs:
+            adapter:    picture_adapter
+        image_fs:
+            adapter:    image_adapter
+        attachment_fs:
+            adapter:    attachment_adapter
+        slide_fs:
+            adapter:    slide_adapter
+        consultant_fs:
+            adapter:    consultant_adapter
+        event_fs:
+            adapter:    event_adapter
+        companyimage_fs:
+            adapter:    companyimage_adapter
+        resumeimage_fs:
+            adapter:    resumeimage_adapter
+        topic_fs:
+            adapter:    topic_adapter
+vich_uploader:
+    db_driver:  orm
+    twig:       true
+    gaufrette:  true
+    storage:    vich_uploader.storage.gaufrette
+    mappings:
+        picture:
+            uri_prefix: /assets/picture
+            namer: vich_uploader.namer_uniqid
+            upload_destination: picture_fs
+            inject_on_load: true
+        image:
+            uri_prefix: /assets/image
+            namer: vich_uploader.namer_uniqid
+            upload_destination: image_fs
+            inject_on_load: true
+        attachment:
+            uri_prefix: /assets/attachment
+            namer: vich_uploader.namer_uniqid
+            upload_destination: slide_fs
+            inject_on_load: true
+        slide:
+            uri_prefix: /assets/slide
+            namer: vich_uploader.namer_uniqid
+            upload_destination: slide_fs
+            inject_on_load: true
+        consultant:
+            uri_prefix: /assets/consultant
+            namer: vich_uploader.namer_uniqid
+            upload_destination: consultant_fs
+            inject_on_load: true
+        event:
+            uri_prefix: /assets/event
+            namer: vich_uploader.namer_uniqid
+            upload_destination: event_fs
+            inject_on_load: true
+        company_image:
+            uri_prefix: /assets/companyimage
+            namer: vich_uploader.namer_uniqid
+            upload_destination: companyimage_fs
+            inject_on_load: true
+        resume_image:
+            uri_prefix: /assets/resumeimage
+            namer: vich_uploader.namer_uniqid
+            upload_destination: resumeimage_fs
+            inject_on_load: true
+        topic:
+            uri_prefix: /assets/topic
+            namer: vich_uploader.namer_uniqid
+            upload_destination: topic_fs
+            inject_on_load: true
+            
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [128, 128], mode: outbound }
+        thumbnail_large:
+            quality: 75
+            filters:
+                thumbnail: { size: [256, 256], mode: outbound }
+        thumbnail_extralage:
+            quality: 75
+            filters:
+                thumbnail: { size: [512, 512], mode: outbound }
+

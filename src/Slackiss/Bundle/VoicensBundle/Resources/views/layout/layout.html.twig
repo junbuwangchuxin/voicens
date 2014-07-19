@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh_CN" {% block html_attr %}{% endblock html_attr %}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{%block title %}{% endblock %}</title>
+    <link rel="icon" sizes="16x16" href="{{asset('favicon.ico')}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('bundles/slackissvoicens/vendor/bootstrap-3.2.0/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bundles/slackissvoicens/vendor/jquery-ui-themes-1.10.4/themes/blitzer/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bundles/slackissvoicens/css/style.css')}}">
+    <!--[if lt IE 9]>
+        <script src="{{asset('bundles/slackissvoicens/vendor/html5shiv.min.js')}}"></script>
+        <script src="{{asset('bundles/slackissvoicens/vendor/respond.min.js')}}"></script>
+    <![endif]-->
+    {% block header %}{% endblock %}
+    {% block top %} {% endblock %}
+  </head>
+  <body{% block bodyattr %}{% endblock bodyattr %}>
+    {% block body %}
+    {% endblock %}
+    <script src="{{asset('bundles/slackissvoicens/vendor/jquery-1.11.1.min.js')}}"></script>
+    <script src="{{asset('bundles/slackissvoicens/vendor/bootstrap-3.2.0/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('bundles/slackissvoicens/vendor/jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js')}}"></script>
+    <script src="{{asset('bundles/slackissvoicens/vendor/jquery.tools.min.js')}}"></script>
+    {% block footer %}{% endblock %}
+    {% block bottom %}{% endblock %}
+  </body>
+</html>
