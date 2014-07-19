@@ -1,0 +1,51 @@
+{% extends "SlackissVoicensBundle:layout:layout.html.twig" %}
+
+{% block title %}文章列表{% endblock %}
+
+{% block body %}
+<table class="table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>标题</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+
+            <tr>
+                <th>摘要</th>
+                <td>{{ entity.summary }}</td>
+            </tr>
+
+            <tr>
+                <th>状态</th>
+                <td>{{ entity.content|raw }}</td>
+            </tr>
+            <tr>
+                <th>状态</th>
+                <td>{{ entity.state }}</td>
+            </tr>
+            <tr>
+                <th>创建时间</th>
+                <td>{{ entity.created }}</td>
+            </tr>
+            <tr>
+                <th>封面图</th>
+                <td>{{ entity.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+<div class="clearfix">
+  <div class="pull-left">
+    <a href="{{ path('admin_article') }}">
+      返回
+    </a>
+  </div>
+  <div class="pull-right">
+    {{ form(delete_form) }}
+  </div>
+</div>
+{% endblock %}

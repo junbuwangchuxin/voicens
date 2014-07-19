@@ -54,7 +54,7 @@
                   <ul class="dropdown-menu" role="menu">
                     {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{path('admin_member_list')}}">会员管理</a></li>
-                    <li><a href="#">文章管理</a></li>
+                    <li><a href="{{path('admin_article')}}">文章管理</a></li>
                     <li class="divider"></li>
                     {% endif %}
                     <li><a href="{{path('fos_user_change_password')}}">修改密码</a></li>

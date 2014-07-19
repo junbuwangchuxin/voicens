@@ -1,0 +1,16 @@
+{% extends "SlackissVoicensBundle:layout:layout.html.twig" %}
+
+{% block title %}文章列表{% endblock %}
+
+{% block body %}
+
+{{ form(edit_form) }}
+
+<div class="clearfix">
+  <div class="pull-right">
+    <a href="{{ path('admin_article') }}">
+      <button class="btn btn-default">返回</button>
+    </a>
+  </div>
+</div>
+{% endblock %}
