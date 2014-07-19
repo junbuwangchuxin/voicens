@@ -17,10 +17,21 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
-    },
+        "incenteev/composer-parameter-handler": "~2.0",
+         "friendsofsymfony/user-bundle": "~2.0@dev",
+        "knplabs/gaufrette": "0.2.*@dev",
+        "vich/uploader-bundle": "dev-master",
+        "knplabs/knp-gaufrette-bundle": "dev-master",
+        "liip/imagine-bundle": "dev-master",
+        "helios-ag/fm-elfinder-bundle": "1.x",
+        "exercise/htmlpurifier-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "dev-master",
+        "knplabs/knp-time-bundle": "dev-master",
+        "Trsteel/ckeditor-bundle": "~1.4"
+     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit": "4.1.*"
     },
     "scripts": {
         "post-root-package-install": [
