@@ -4,7 +4,7 @@ namespace Slackiss\Bundle\VoicensBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Article
  *
@@ -59,7 +59,8 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="member", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Member")
+     * @ORM\JoinColumn(name="member_id",referencedColumnName="id")
      */
     private $member;
 
