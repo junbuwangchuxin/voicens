@@ -53,12 +53,12 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.user.username}} <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="#">会员管理</a></li>
+                    <li><a href="{{path('admin_member_list')}}">会员管理</a></li>
                     <li><a href="#">文章管理</a></li>
                     <li class="divider"></li>
                     {% endif %}
-                    <li><a href="#">修改密码</a></li>
-                    <li><a href="#">注销</a></li>
+                    <li><a href="{{path('fos_user_change_password')}}">修改密码</a></li>
+                    <li><a href="{{path('fos_user_security_logout')}}">注销</a></li>
                   </ul>
                 </li>
               </ul>

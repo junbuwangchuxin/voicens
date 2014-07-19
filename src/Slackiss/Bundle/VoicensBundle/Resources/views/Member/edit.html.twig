@@ -1,0 +1,21 @@
+{% extends "SlackissVoicensBundle:layout:layout.html.twig" %}
+
+{% block title %}
+编辑会员:{{entity.username}}
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>编辑会员 <small></small></h2>
+</div>
+<ol class="breadcrumb clearfix">
+  <li><a href="{{path('admin_member_list')}}">会员管理</a></li>
+  <li class="active">
+    <a href="{{path('admin_member_edit',{id:entity.id})}}">编辑会员</a></li>
+  <li class="pull-right">
+    <a href="{{path('admin_member_list')}}">返回</a>
+  </li>
+</ol>
+{% include "SlackissVoicensBundle:include:notice.html.twig" %}
+{{form(form)}}
+{% endblock %}

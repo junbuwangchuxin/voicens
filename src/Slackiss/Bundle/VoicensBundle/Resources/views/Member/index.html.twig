@@ -1,0 +1,55 @@
+{% extends "SlackissVoicensBundle:layout:layout.html.twig" %}
+
+{% block title %}
+会员管理
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>会员管理 <small></small></h2>
+</div>
+<ol class="breadcrumb clearfix">
+  <li><a href="{{path('admin_member_list')}}">会员管理</a></li>
+  <li class="active">会员列表</li>
+  <li class="pull-right">
+    <a href="{{path('admin_member_new')}}">添加会员</a>
+  </li>
+</ol>
+{% include "SlackissVoicensBundle:include:notice.html.twig" %}
+<table class="table">
+  <tr>
+    <th>用户名</th>
+    <th>信箱</th>
+    <th>创建时间</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  {% for entity in entities %}
+  <tr>
+    <td>{{entity.username}}</td>
+    <td>{{entity.email}}</td>
+    <td>
+      {{entity.created|date('Y-m-d')}}
+    </td>
+    <td>
+      {% if entity.enabled %}
+      <span class="label label-success">正常</span>
+      {% else %}
+      <span class="label label-danger">已禁用</span>
+      {% endif %}
+    </td>
+    <td>
+      {% if not entity.hasRole('ROLE_ADMIN') and  not entity.hasRole('ROLE_DEV') %}
+      <a href="{{path('admin_member_edit',{id:entity.id})}}"><button class="btn btn-default">编辑</button></a>
+      {% if entity.enabled %}
+      <a href="{{path('admin_member_delete',{id:entity.id})}}" onclick="return confirm('您确定要禁用{{entity.username}}吗？')"><button class="btn btn-default">禁用</button></a>
+      {% else %}
+      <a href="{{path('admin_member_enable',{id:entity.id})}}" onclick="return confirm('您确定要启用{{entity.username}}吗？')"><button class="btn btn-default">启用</button></a>
+      {% endif %}
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{{ knp_pagination_render(entities) }}
+{% endblock %}
