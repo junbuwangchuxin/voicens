@@ -100,7 +100,7 @@ class ArticleController extends Controller
     */
     private function createEditForm(Article $entity)
     {
-        $form = $this->createForm(new ArticleType(), $entity, array(
+        $form = $this->createForm(new ArticleType(true), $entity, array(
             'action' => $this->generateUrl('admin_article_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -160,8 +160,7 @@ class ArticleController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Article entity.');
             }
-
-            $em->remove($entity);
+            $entity->setState(Article::STATE_DISABLED);
             $em->flush();
         }
 
