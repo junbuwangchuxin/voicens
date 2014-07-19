@@ -8,6 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ArticleType extends AbstractType
 {
+
+    protected $isEdit;
+
+    public function __construct($isEdit=false)
+    {
+        $this->isEdit = $isEdit;
+    }
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -40,13 +47,12 @@ class ArticleType extends AbstractType
                     'route_parameters' => array(),
                 ),
             ))
-            ->add('attach',null,[
-                'label'=>'封面图',
-                'required'=>!$this->isEdit,
-                'attr'=>[
-
-                ]
-            ])
+            ->add('attach','file',   array(
+                'label' => '封面图',
+                'required' => !$this->isEdit,
+                'attr' => array()
+            )
+            )
         ;
     }
 

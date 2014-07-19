@@ -1,0 +1,16 @@
+{% extends "SlackissVoicensBundle:layout:layout.html.twig" %}
+
+{% block title %}添加文章{% endblock %}
+
+{% block body %}
+
+{{ form(form) }}
+
+<div class="clearfix">
+  <div class="pull-right">
+    <a href="{{ path('author_article_list') }}">
+      <button class="btn btn-default">返回</button>
+    </a>
+  </div>
+</div>
+{% endblock %}

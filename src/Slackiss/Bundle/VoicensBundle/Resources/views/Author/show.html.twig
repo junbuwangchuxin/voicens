@@ -39,19 +39,17 @@
                     <a href="{{vich_uploader_asset(entity,'attach')}}" target="_blank">
                         <img src="{{vich_uploader_asset(entity,'attach')|imagine_filter('thumbnail')}}"/>
                     </a>
-               </td>
+                </td>
             </tr>
         </tbody>
     </table>
 
 <div class="clearfix">
   <div class="pull-left">
-    <a href="{{ path('admin_article') }}">
+    <a href="{{ path('author_article_list') }}">
       返回
     </a>
   </div>
-  <div class="pull-right">
-    {{ form(delete_form) }}
-  </div>
+
 </div>
 {% endblock %}

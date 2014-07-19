@@ -5,9 +5,13 @@ namespace Slackiss\Bundle\VoicensBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
 /**
  * Article
- *
+ * @Vich\Uploadable
  * @ORM\Table(name="voicens_article")
  * @ORM\Entity(repositoryClass="Slackiss\Bundle\VoicensBundle\Entity\ArticleRepository")
  */
@@ -106,7 +110,7 @@ class Article
      */
     private $remark;
     /**
-     * @ORM\Column(name="image",type="string",length=255)
+     * @ORM\Column(type="string",length=255,name="image",nullable=true)
      */
     protected $image;
 
@@ -127,9 +131,9 @@ class Article
      *     mimeTypes={"image/png","image/jpeg","image/pjpeg",
      *                          "image/jpg","image/gif"}
      * )
-     * @Vich\UploadableField(mapping="image", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="image", fileNameProperty="image", nullable=true)
      *
-     * @var File $image
+     * @var File $attach
      */
     private $attach;
 
