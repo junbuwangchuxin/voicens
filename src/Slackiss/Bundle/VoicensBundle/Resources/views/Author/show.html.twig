@@ -13,16 +13,6 @@
                 <th>标题</th>
                 <td>{{ entity.title }}</td>
             </tr>
-
-            <tr>
-                <th>摘要</th>
-                <td>{{ entity.summary }}/td>
-            </tr>
-
-            <tr>
-                <th>内容</th>
-                <td>{{ entity.content|raw }}</td>
-            </tr>
             <tr>
                 <th>状态</th>
                 <td>
@@ -41,6 +31,16 @@
                     </a>
                 </td>
             </tr>
+            <tr>
+                <th>摘要</th>
+                <td>{{ entity.summary }}/td>
+            </tr>
+
+            <tr>
+                <th>内容</th>
+                <td>{{ entity.content|raw }}</td>
+            </tr>
+
         </tbody>
     </table>
 

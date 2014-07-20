@@ -11,49 +11,48 @@ class ArticleType extends AbstractType
 
     protected $isEdit;
 
-    public function __construct($isEdit=false)
+    public function __construct($isEdit = false)
     {
         $this->isEdit = $isEdit;
     }
-        /**
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title','text',[
-                'label'=>'标题',
-                'required'=>true,
-                'attr'=>[
-                    'class'=>'form-control'
+            ->add('title', 'text', [
+                'label' => '标题',
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
-            ->add('summary','textarea',[
-                'label'=>'摘要',
-                'required'=>false,
-                'attr'=>[
-                    'rows'=>8,
-                    'class'=>'form-control'
+            ->add('attach', 'file', array(
+                'label' => '封面图',
+                'required' => !$this->isEdit,
+                'attr' => array()
+            ))
+            ->add('summary', 'textarea', [
+                'label' => '摘要',
+                'required' => false,
+                'attr' => [
+                    'rows' => 8,
+                    'class' => 'form-control'
                 ]
             ])
             ->add('content', 'ckeditor', array(
-                'label'=>'内容',
-                'attr'=>array(
-                    'class'=>'form-control'
+                'label' => '内容',
+                'attr' => array(
+                    'class' => 'form-control'
                 ),
                 'filebrowser_image_browse_url' => array(
                     'route' => 'elfinder',
                     'route_parameters' => array(),
                 ),
-            ))
-            ->add('attach','file',   array(
-                'label' => '封面图',
-                'required' => !$this->isEdit,
-                'attr' => array()
-            )
-            )
-        ;
+            ));
     }
 
     /**

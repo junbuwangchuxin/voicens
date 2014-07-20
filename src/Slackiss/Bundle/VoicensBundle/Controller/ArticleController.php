@@ -31,7 +31,7 @@ class ArticleController extends Controller
         $page = $request->query->get('page',1);
         $repo = $em->getRepository('SlackissVoicensBundle:Article');
         $query = $repo->createQueryBuilder('a')
-                      ->orderBy('a.id','desc')
+                      ->orderBy('a.modified','desc')
                       ->getQuery();
         $entities = $this->get('knp_paginator')->paginate($query,$page,50);
         return array(
@@ -39,6 +39,25 @@ class ArticleController extends Controller
         );
     }
 
+    /**
+     * Lists all Article entities.
+     *
+     * @Route("/publish/{id}", name="admin_article_publish")
+     * @Method("GET")
+     */
+    public function publishArticleAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Article entity.');
+        }
+        $entity->setModified( new \DateTime());
+        $entity->setState(Article::STATE_PUBLISHED);
+        $em->flush();
+        return $this->redirect($this->generateUrl('admin_article'));
+    }
     /**
      * Finds and displays a Article entity.
      *
@@ -105,7 +124,7 @@ class ArticleController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => '保存'));
 
         return $form;
     }
@@ -131,6 +150,7 @@ class ArticleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $entity->setModified( new \DateTime());
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_article_edit', array('id' => $id)));
@@ -160,6 +180,7 @@ class ArticleController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Article entity.');
             }
+            $entity->setModified( new \DateTime());
             $entity->setState(Article::STATE_DISABLED);
             $em->flush();
         }
@@ -179,7 +200,7 @@ class ArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_article_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => '删除'))
             ->getForm()
         ;
     }

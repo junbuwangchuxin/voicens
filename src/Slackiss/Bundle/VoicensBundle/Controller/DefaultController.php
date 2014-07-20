@@ -18,6 +18,15 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $current = $this->get('security.context')->getToken()->getUser();
+        if($current->hasRole('ROLE_ADMIN')){
+            return $this->redirect($this->generateUrl('admin_article'));
+        }
+       else if($current->hasRole('ROLE_AUTHOR')){
+           return $this->redirect($this->generateUrl('author_article_list'));
+       } if($current->hasRole('ROLE_USER')){
+        return $this->redirect($this->generateUrl('user_article_list'));
+    }
         $param = [];
         return $param;
     }

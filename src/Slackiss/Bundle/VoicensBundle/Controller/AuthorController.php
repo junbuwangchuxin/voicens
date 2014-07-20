@@ -108,7 +108,7 @@ class AuthorController  extends Controller{
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => '保存'));
 
         return $form;
     }
@@ -128,8 +128,12 @@ class AuthorController  extends Controller{
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
+        $current = $this->get('security.context')->getToken()->getUser();
 
 
+        if($current->getId()!==$entity->getMember()->getId()){
+          return  $this->redirect($this->generateUrl('author_article_list'));
+        }
         return array(
             'entity'      => $entity
         );
@@ -145,8 +149,14 @@ class AuthorController  extends Controller{
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $current = $this->get('security.context')->getToken()->getUser();
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
+
+        if($current->getId()!=$entity->getMember()->getId()){
+            return $this->redirect($this->generateUrl('author_article_list'));
+        }
+        if($entity->getState()!==Article::STATE_DRAFT)
+            return $this->redirect($this->generateUrl('author_article_list'));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Article entity.');
@@ -186,6 +196,7 @@ class AuthorController  extends Controller{
             $current = $this->get('security.context')->getToken()->getUser();
 
             if($current->getId()===$entity->getMember()->getId()){
+                $entity->setModified( new \DateTime());
                 $em->flush();
                 return $this->redirect($this->generateUrl('author_article_edit', array('id' => $id)));
 
@@ -211,7 +222,7 @@ class AuthorController  extends Controller{
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => '保存'));
 
         return $form;
     }
@@ -258,7 +269,7 @@ class AuthorController  extends Controller{
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('author_article_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => '禁用'))
             ->getForm()
             ;
     }
