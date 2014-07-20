@@ -109,12 +109,12 @@ fm_elfinder:
                 upload_max_size: 4M
 
 knp_paginator:
-    page_range: 5                   
+    page_range: 5
     default_options:
-        page_name: page             
-        sort_field_name: sort       
+        page_name: page
+        sort_field_name: sort
         sort_direction_name: direction
-        distinct: true                
+        distinct: true
     template:
         pagination: SlackissVoicensBundle:include:pagination.html.twig
 
@@ -122,7 +122,7 @@ knp_time: ~
 
 
 fos_user:
-    db_driver: orm 
+    db_driver: orm
     firewall_name: main
     user_class: Slackiss\Bundle\VoicensBundle\Entity\Member
     from_email:
@@ -151,6 +151,7 @@ vich_uploader:
             uri_prefix: /assets/image
             namer: vich_uploader.namer_uniqid
             upload_destination: image_fs
+            delete_on_remove: true
             inject_on_load: true
 
 liip_imagine:

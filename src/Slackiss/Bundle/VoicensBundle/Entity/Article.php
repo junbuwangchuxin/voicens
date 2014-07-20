@@ -19,7 +19,7 @@ class Article
 {
     const STATE_DRAFT = 'draft';
     const STATE_DISABLED = 'disabled';
-    const STATE_published = 'published';
+    const STATE_PUBLISHED = 'published';
 
     public function __construct()
     {

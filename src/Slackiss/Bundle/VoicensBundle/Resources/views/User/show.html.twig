@@ -1,0 +1,47 @@
+{% extends "SlackissVoicensBundle:layout:layout.html.twig" %}
+
+{% block title %}{{ entity.title  }}{% endblock %}
+
+{% block body %}
+<table class="table">
+        <tbody>
+        <tr>
+            <th></th>
+            <td>
+                <a href="{{vich_uploader_asset(entity,'attach')}}" target="_blank">
+                    <img src="{{vich_uploader_asset(entity,'attach')|imagine_filter('thumbnail_large')}}"/>
+                </a>
+            </td>
+        </tr>
+            <tr>
+                <th>标题</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+
+            <tr>
+                <th>最后更新时间</th>
+                <td>{{ entity.modified|date('Y-m-d H:i') }}</td>
+            </tr>
+
+            <tr>
+                <th>摘要</th>
+                <td>{{ entity.summary }}/td>
+            </tr>
+
+            <tr>
+                <th>内容</th>
+                <td>{{ entity.content|raw }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+<div class="clearfix">
+  <div class="pull-left">
+    <a href="{{ path('user_article_list') }}">
+      返回
+    </a>
+  </div>
+
+</div>
+{% endblock %}
