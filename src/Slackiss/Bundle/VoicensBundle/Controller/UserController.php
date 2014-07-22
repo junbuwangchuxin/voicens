@@ -62,7 +62,7 @@ class UserController extends Controller{
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException('没找到这个文章');
         }
 
 
@@ -75,4 +75,4 @@ class UserController extends Controller{
     }
 
 
-} 
+}
