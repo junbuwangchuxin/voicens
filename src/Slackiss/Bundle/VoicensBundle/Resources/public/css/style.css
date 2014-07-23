@@ -7,3 +7,115 @@
   padding: 5px 0px;
   color: #666666;
 }
+
+.post-meta .meta-title:hover{
+    color: #0099cc;
+
+}
+
+
+.grid-article {
+    width: 620px;
+    margin:0 auto;
+}
+.grid-article .floated-thumb{
+    border-bottom: 1px dotted #e8e8e8;
+    margin-bottom: 10px;
+}
+.grid-article .floated-thumb p{
+    margin-bottom: 5px;
+}
+
+.grid-article .floated-thumb .post-thumb {
+    margin-bottom: 10px;
+}
+.grid-article .floated-thumb span.excerpt {
+    color: #000;
+    margin-bottom: 5px;
+}
+
+#archive .floated-thumb {
+    border-bottom: 1px dotted #e8e8e8;
+    margin-bottom: 10px;
+
+}
+#archive .floated-thumb .post-thumb {
+    margin-bottom: 10px;
+}
+
+.floated-thumb .post-thumb:hover {
+    background: #333;
+    border-color: #333;
+}
+.floated-thumb {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.floated-thumb .post-thumb {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 4px;
+    border: 1px solid #e8e8e8;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.post {
+    padding-bottom: 20px;
+}
+
+.post-meta .meta-title {
+    color: #333;
+    text-transform: none;
+    font-weight: bold;
+    font-size: 13px;
+    text-decoration: none;
+    font-family: "Microsoft YaHei",'Myriad Pro','Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.read-more {
+    line-height: 20px;
+    font-size: 13px;
+    color: #fffffe;
+    font-weight: 700;
+    text-align: right;
+}
+
+.read-more a {
+    background: none repeat scroll 0 0 #22bcdd;
+    color: #ffffff !important;
+    display: inline-block;
+    padding: 4px 13px;
+    text-decoration: none;
+}
+.read-more a:hover {
+    background: none repeat scroll 0 0 #0ca3c4;
+    text-decoration: none;
+}
+.align-right {
+    text-align: right;
+}
+
+.entry-header h1 {
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8e8e8;
+    margin: -5px 0 10px 0;
+    text-align: center;
+    font-family: "Microsoft YaHei", 'Myriad Pro','Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

@@ -3,31 +3,49 @@
 {% block title %}文章列表{% endblock %}
 
 {% block body %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>封面</th>
-            <th>标题</th>
-            <th>摘要</th>
-            <th>更新时间</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>
-                <a href="{{vich_uploader_asset(entity,'attach')}}" target="_blank">
-                    <img src="{{vich_uploader_asset(entity,'attach')|imagine_filter('thumbnail')}}"/>
-                </a>
-                </td>
-                <td><a href="{{ path('user_article_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
-                <td>{{ entity.summary|nl2br }}</td>
-                <td>{{ entity.modified|date('Y-m-d h:j') }}</td>
 
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="grid-article" id="archive">
+    {% for entity in entities %}
+        <!-- BEGIN .post -->
+        <div class="post floated-thumb">
+
+            <!-- BEGIN .post-thumb -->
+
+            <div class="post-thumb">
+                <a target="_blank" href="{{ path('user_article_show', { 'id': entity.id }) }}" title="{{ entity.title }}"><img
+                            src="{{vich_uploader_asset(entity,'attach')|imagine_filter('thumbnail')}}" alt=""> </a>
+            </div>
+            <!-- END .post-thumb -->
+
+
+            <!-- BEGIN .post-meta -->
+            <div class="post-meta">
+
+                <p><a class="meta-title" target="_blank" href="{{ path('user_article_show', { 'id': entity.id }) }}"
+                      title="{{ entity.title }}">{{ entity.title }}</a><br>{{ entity.created|date('Y/m/d') }}
+                 </p>
+
+			<span class="excerpt"><p>
+                    {{ entity.summary|nl2br }}
+			</p>
+</span>
+
+                <p class="align-right"><span class="read-more"><a target="_blank" href="{{ path('user_article_show', { 'id': entity.id }) }}">阅读全文
+                            &gt;&gt;</a></span></p>
+
+            </div>
+            <!-- END .post-meta -->
+
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .post -->
+
+    {% endfor %}
+
+    </div>
+
+
     {{knp_pagination_render(entities) }}
 {% endblock %}
