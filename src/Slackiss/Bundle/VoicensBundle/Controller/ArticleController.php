@@ -153,7 +153,7 @@ class ArticleController extends Controller
             $entity->setModified( new \DateTime());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_article_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_article_show', array('id' => $id)));
         }
 
         return array(
