@@ -27,7 +27,7 @@
                     <a href="{{ path('author_article_show', { 'id': entity.id }) }}">
                         <button class="btn btn-default">查看</button>
                     </a>
-            {% if entity.state == 'draft' %}
+            {% if entity.state == 'draft' or entity.state == 'published' %}
                     <a href="{{ path('author_article_edit', { 'id': entity.id }) }}">
                         <button class="btn btn-default">编辑</button>
                     </a>

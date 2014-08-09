@@ -32,6 +32,7 @@ class ArticleController extends Controller
         $repo = $em->getRepository('SlackissVoicensBundle:Article');
         $query = $repo->createQueryBuilder('a')
                       ->orderBy('a.modified','desc')
+                      ->where('a.status = true' )
                       ->getQuery();
         $entities = $this->get('knp_paginator')->paginate($query,$page,50);
         return array(
@@ -51,12 +52,15 @@ class ArticleController extends Controller
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException('没找到这篇文章.');
         }
+        if ($entity->getStatus())
+            {
         $entity->setModified( new \DateTime());
         $entity->setState(Article::STATE_PUBLISHED);
         $em->flush();
         return $this->redirect($this->generateUrl('admin_article'));
+            }
     }
     /**
      * Finds and displays a Article entity.
@@ -72,8 +76,11 @@ class ArticleController extends Controller
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException('没找到这篇文章.');
         }
+
+        if ($entity->getStatus())
+        {
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -81,6 +88,7 @@ class ArticleController extends Controller
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         );
+        }
     }
 
     /**
@@ -97,8 +105,10 @@ class ArticleController extends Controller
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException('没找到这篇文章.');
         }
+        if ($entity->getStatus())
+        {
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -108,6 +118,7 @@ class ArticleController extends Controller
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+        }
     }
 
     /**
@@ -142,8 +153,10 @@ class ArticleController extends Controller
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException('没找到这篇文章.');
         }
+        if ($entity->getStatus())
+        {
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
@@ -161,6 +174,7 @@ class ArticleController extends Controller
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+        }
     }
     /**
      * Deletes a Article entity.

@@ -155,8 +155,8 @@ class AuthorController  extends Controller{
         if($current->getId()!=$entity->getMember()->getId()){
             return $this->redirect($this->generateUrl('author_article_list'));
         }
-        if($entity->getState()!==Article::STATE_DRAFT)
-            return $this->redirect($this->generateUrl('author_article_list'));
+        //   if($entity->getState()==Article::STATE_DISABLED)
+        //       { return $this->redirect($this->generateUrl('author_article_list'));}
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Article entity.');
@@ -197,6 +197,7 @@ class AuthorController  extends Controller{
 
             if($current->getId()===$entity->getMember()->getId()){
                 $entity->setModified( new \DateTime());
+                $entity->setState(Article::STATE_DRAFT);
                 $em->flush();
                 return $this->redirect($this->generateUrl('author_article_edit', array('id' => $id)));
 
@@ -273,4 +274,4 @@ class AuthorController  extends Controller{
             ->getForm()
             ;
     }
-} 
+}
