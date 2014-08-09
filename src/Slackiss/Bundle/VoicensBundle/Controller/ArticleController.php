@@ -214,7 +214,7 @@ class ArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_article_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => '删除'))
+            ->add('submit', 'submit', array('label' => '禁用'))
             ->getForm()
         ;
     }
