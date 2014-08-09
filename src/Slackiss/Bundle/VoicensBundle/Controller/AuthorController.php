@@ -126,7 +126,7 @@ class AuthorController  extends Controller{
 
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
-        if (!$entityy||!$entity->getStatus()) {
+        if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这篇文章.');
         }
         $current = $this->get('security.context')->getToken()->getUser();
@@ -159,7 +159,7 @@ class AuthorController  extends Controller{
            if($entity->getState()==Article::STATE_DISABLED)
                { return $this->redirect($this->generateUrl('author_article_list'));}
 
-           if (!$entityy||!$entity->getStatus()) {
+           if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这个文章.');
         }
 
@@ -185,7 +185,7 @@ class AuthorController  extends Controller{
 
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
-        if (!$entityy||!$entity->getStatus()) {
+        if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这个文章.');
         }
 
@@ -244,7 +244,7 @@ class AuthorController  extends Controller{
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
-            if (!$entityy||!$entity->getStatus()) {
+            if (!$entity||!$entity->getStatus()) {
                 throw $this->createNotFoundException('没找到这个文章.');
             }
 

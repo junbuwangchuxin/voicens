@@ -104,7 +104,7 @@ class ArticleController extends Controller
 
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
-        if (!$entityy||!$entity->getStatus()) {
+        if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这篇文章.');
         }
         if ($entity->getStatus())
@@ -191,7 +191,7 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
-            if (!$entityy||!$entity->getStatus()) {
+            if (!$entity||!$entity->getStatus()) {
                 throw $this->createNotFoundException('没找到这篇文章.');
             }
             $entity->setModified( new \DateTime());

@@ -38,7 +38,8 @@ class UserController extends Controller{
         $repo = $em->getRepository('SlackissVoicensBundle:Article');
         $query = $repo->createQueryBuilder('a')
             ->orderBy('a.modified','desc')
-            ->where('a.state = :state')
+            ->where('a.status=true')
+            ->andwhere('a.state = :state')
             ->setParameters(array('state'=>Article::STATE_PUBLISHED))
             ->getQuery();
 
@@ -61,7 +62,7 @@ class UserController extends Controller{
 
         $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
 
-        if (!$entity) {
+        if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这个文章');
         }
 
