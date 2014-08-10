@@ -55,6 +55,39 @@ class AuthorController  extends Controller{
     }
 
 
+    /**
+     * Lists all Article entities.
+     *
+     * @Route("/check/{id}", name="author_article_check")
+     * @Method("GET")
+     */
+    public function checkArticleAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
+        $current = $this->get('security.context')->getToken()->getUser();
+        $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
+
+        if($current->getId()!=$entity->getMember()->getId()){
+            return $this->redirect($this->generateUrl('author_article_list'));
+        }
+        if($entity->getState()==Article::STATE_DISABLED)
+        { return $this->redirect($this->generateUrl('author_article_list'));}
+
+        if (!$entity||!$entity->getStatus()) {
+            throw $this->createNotFoundException('没找到这个文章.');
+        }
+        if ($entity->getState()==Article::STATE_DRAFT)
+            {
+        $entity->setModified( new \DateTime);
+        $entity->setState(Article::STATE_CHECKED);
+        $em->flush();
+        return $this->redirect($this->generateUrl('author_article_list'));
+            }
+
+    }
+
+
 
     /**
      * Displays a form to create a new Article entity.

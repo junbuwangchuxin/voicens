@@ -19,7 +19,7 @@
                 <td>{{ entity.id }}</td>
                 <td><a href="{{ path('author_article_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
                 <td>
-                    {{ entity.state=='draft'?'草稿': entity.state=='published'?'发布':'禁用' }}
+                    {{ entity.state=='draft'?'草稿': entity.state=='published'?'发布': entity.state=='checked'?'发布中':'禁用' }}
 
                 </td>
                 <td>{{ entity.created|date('Y-m-d h:j') }}</td>
@@ -27,9 +27,12 @@
                     <a href="{{ path('author_article_show', { 'id': entity.id }) }}">
                         <button class="btn btn-default">查看</button>
                     </a>
-            {% if entity.state == 'draft' or entity.state == 'published' or entity.state == 'disabled' %}
+            {% if entity.state == 'draft' or entity.state == 'published' or entity.state == 'disabled' or entity.state == 'checked' %}
                     <a href="{{ path('author_article_edit', { 'id': entity.id }) }}">
                         <button class="btn btn-default">编辑</button>
+                    </a>
+                     <a href="{{ path('author_article_check', { 'id': entity.id }) }}">
+                        <button class="btn btn-default">发布</button>
                     </a>
             {% endif %}
 
