@@ -54,13 +54,15 @@ class ArticleController extends Controller
         if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这篇文章.');
         }
-        if ($entity->getStatus())
+        if ($entity->getState()==Article::STATE_DISABLED)
             {
+                throw $this->createNotFoundException('禁用的文章不能发表');
+            }
         $entity->setModified( new \DateTime());
         $entity->setState(Article::STATE_PUBLISHED);
         $em->flush();
         return $this->redirect($this->generateUrl('admin_article'));
-            }
+
     }
     /**
      * Finds and displays a Article entity.

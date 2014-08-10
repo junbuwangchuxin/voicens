@@ -200,7 +200,7 @@ class AuthorController  extends Controller{
                 $entity->setModified( new \DateTime());
                 $entity->setState(Article::STATE_DRAFT);
                 $em->flush();
-                return $this->redirect($this->generateUrl('author_article_edit', array('id' => $id)));
+                return $this->redirect($this->generateUrl('author_article_show', array('id' => $id)));
 
         }
         }
