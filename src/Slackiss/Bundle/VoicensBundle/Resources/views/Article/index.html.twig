@@ -24,7 +24,7 @@
                     </a>
                 </td>
                 <td>
-                    {{ entity.state=='draft'?'草稿': entity.state=='published'?'发布':'禁用' }}
+                    {{ entity.state=='draft'?'草稿': entity.state=='published'?'发布': entity.state=='checked'?'待审核':'禁用' }}
 
                 </td>
                 <td>
