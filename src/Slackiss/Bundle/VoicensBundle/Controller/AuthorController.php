@@ -304,6 +304,12 @@ class AuthorController  extends Controller{
      */
     private function createDeleteForm($id)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('SlackissVoicensBundle:Article')->find($id);
+        if(!$entity->getEnabled())
+            {
+
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('author_article_delete', array('id' => $id)))
             ->setMethod('DELETE')
@@ -311,4 +317,16 @@ class AuthorController  extends Controller{
             ->getForm()
             ;
     }
+        else
+        {
+
+            return $this->createFormBuilder()
+                        ->setAction($this->generateUrl('author_article_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => '启用'))
+                        ->getForm()
+                ;
+        }
+    }
+
 }
