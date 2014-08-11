@@ -189,8 +189,11 @@ class AuthorController  extends Controller{
         if($current->getId()!=$entity->getMember()->getId()){
             return $this->redirect($this->generateUrl('author_article_list'));
         }
-           if($entity->getState()==Article::STATE_DISABLED)
-               { return $this->redirect($this->generateUrl('author_article_list'));}
+        //        if($entity->getState()==Article::STATE_DISABLED)
+        //   {
+        //       throw $this->createNotFoundException('禁用的文章不能发表');
+//
+        //           }
 
            if (!$entity||!$entity->getStatus()) {
             throw $this->createNotFoundException('没找到这个文章.');
